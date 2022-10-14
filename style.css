@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap");
+
+/* Josh's Custom CSS Reset 
+https://www.joshwcomeau.com/css/custom-css-reset/ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* Remove animations preference */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* My styling */
+* {
+  font-family: "JetBrains Mono", monospace;
+}
+
+body {
+  background-color: hsl(200, 15%, 75%);
+}
+
+input:focus {
+  outline: 2px solid hsl(200, 100%, 75%);
+}
+
+main {
+  padding-inline: 1rem;
+  padding-block: 2rem;
+  max-width: 1000px;
+  margin-inline: auto;
+  min-height: 100%;
+  text-align: center;
+}
+
+.search-form {
+  margin-block: 1rem;
+  font-size: 1.5rem;
+  position: relative;
+}
+
+.search-form input {
+  width: 100%;
+  height: 4rem;
+  /* border-radius: 3rem; */
+  border: 2px solid rgba(0 0 0 / 1);
+  padding-left: 4rem;
+}
+
+.search-form svg {
+  position: absolute;
+  height: 2.5rem;
+  bottom: 0.6rem;
+  left: 1rem;
+}
+
+.result {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  gap: 1rem;
+}
+
+.result article {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  text-align: center;
+  overflow: hidden;
+  backdrop-filter: brightness(1.15) saturate(0.5);
+  border: 1px solid rgb(0 0 0 / 0.5);
+  animation: fade-in 500ms ease forwards;
+}
+
+.result article:not([class="active"]):hover {
+  cursor: pointer;
+  outline: 2px solid hsla(200, 100%, 75%, 0.75);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.result article.active {
+  text-align: start;
+  font-size: 1.5rem;
+}
+
+.result article img {
+  width: 100%;
+  image-rendering: crisp-edges;
+  border: 1px solid rgb(0 0 0 / 0.5);
+}
+
+.result article > div {
+  border: 1px solid rgb(0 0 0 / 0.5);
+}
+
+.result article p {
+  background-color: rgb(0 0 0 / 0.2);
+  padding: 0.5rem 1rem;
+}
+
+.result article.active p {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.info {
+  display: none;
+  padding-inline-start: 2.5rem;
+  padding-block: 0.5rem;
+  list-style: square;
+}
+
+.active .info {
+  display: block;
+}
+
+@media screen and (min-width: 600px) {
+  main {
+    padding-inline: 2rem;
+  }
+  .result {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .result article.active {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .result article.active img {
+    grid-row: 1 / -1;
+    grid-column: 2 / 3;
+  }
+
+  .result article.active > div {
+    grid-column: 1 / 2;
+  }
+}
