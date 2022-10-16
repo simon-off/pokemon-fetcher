@@ -24,8 +24,8 @@ const updateUISuccess = (data) => {
   <div>
     <p>${result.name}</p>
     <ul class="info">
-      <li>height: ${result.height}</li>
-      <li>weight: ${result.weight}</li>
+      <li>height: ${result.height / 10}m</li>
+      <li>weight: ${result.weight / 10}kg</li>
     </ul>
   </div>
   `;
@@ -67,7 +67,7 @@ let oldResult = [];
 
 searchField.addEventListener("input", () => {
   if (searchField.value !== "") {
-    const result = pokemon.filter((mon) => mon.includes(searchField.value));
+    const result = pokemon.filter((mon) => mon.includes(searchField.value.toLowerCase()));
     if (result.length > 10) result.splice(10, result.length - 10);
     if (result.toString() !== oldResult.toString()) {
       resultSection.innerHTML = "";
@@ -85,3 +85,5 @@ searchField.addEventListener("input", () => {
 searchForm.addEventListener("submit", (e) => e.preventDefault());
 
 createRequest(pokeUrl + "?limit=151", false);
+
+// TODO: Add all pokemon when no search
